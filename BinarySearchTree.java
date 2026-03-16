@@ -6,17 +6,19 @@ class BinarySearchTree {
         Node left;
         Node right;
 
-        Node(int val) {
+        Node(int val){
             this.val = val;
-            left = right = null;
+            this.left = null;
+            this.right = null;
         }
     }
 
     Node root;
 
+
     Node insert(Node root, int val) {
 
-        if(root == null) {
+        if (root == null) {
             return new Node(val);
         }
 
@@ -32,9 +34,8 @@ class BinarySearchTree {
         if (root == null) {
             return;
         }
-
         inorder(root.left);
-        System.out.println(root.val + " ");
+        System.out.print(root.val + " ");
         inorder(root.right);
     }
 
@@ -50,3 +51,22 @@ class BinarySearchTree {
         tree.inorder(tree.root);
     }
 }
+
+/*
+Time Complexity:
+Insert Operation: O(h)
+- Best/Average Case: O(log n) when the BST is balanced
+- Worst Case: O(n) when the tree becomes skewed
+
+Inorder Traversal: O(n) because every node is visited once.
+
+Space Complexity:
+Auxiliary Space: O(h) due to recursion stack
+- Balanced Tree: O(log n)
+- Skewed Tree: O(n)
+
+Total Space for storing BST: O(n)
+Where:
+n = number of nodes
+h = height of the tree
+*/
