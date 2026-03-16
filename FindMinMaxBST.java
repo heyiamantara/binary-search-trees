@@ -12,52 +12,46 @@ class FindMinMaxBST {
 
     public static int findMax(Node root) {
         if (root == null) {
-            return -1;
+            return Integer.MIN_VALUE;
         }
 
-        while (root.right != null) {
-            root = root.right;
-        }
+        int leftMax = findMax(root.left);
+        int rightMax = findMax(root.right);
 
-        return root.data;
+        return Math.max(root.data, Math.max(leftMax, rightMax));
     }
 
     public static int findMin(Node root) {
         if (root == null) {
-            return -1;
+            return Integer.MAX_VALUE;
         }
 
-        while (root.left != null) {
-            root = root.left;
-        }
+        int leftMin = findMin(root.left);
+        int rightMin = findMin(root.right);
 
-        return root.data;
+        return Math.min(root.data, Math.min(leftMin, rightMin));
     }
 
     public static void main(String[] args) {
 
-        Node root = new Node(8);
-        root.left = new Node(3);
-        root.right = new Node(10);
-        root.left.left = new Node(1);
-        root.left.right = new Node(6);
-        root.right.right = new Node(14);
+        Node root = new Node(7);
+        root.left = new Node(8);
+        root.right = new Node(6);
+        root.left.left = new Node(3);
 
-        System.out.println("Minimum value in BST: " + findMin(root));
-        System.out.println("Maximum value in BST: " + findMax(root));
+        System.out.println("Minimum value in Tree: " + findMin(root));
+        System.out.println("Maximum value in Tree: " + findMax(root));
     }
 }
 
 /*
-Time Complexity:
-findMin: O(h)
-findMax: O(h)
+Time Complexity: O(n)
+- Each node is visited once.
 
-Best/Average Case (Balanced BST): O(log n)
-Worst Case (Skewed BST): O(n)
-
-Space Complexity: O(1)
-Iterative approach uses no recursion stack.
+Space Complexity: O(h)
+- Due to recursion stack.
+- Balanced tree: O(log n)
+- Worst case (skewed tree): O(n)
 
 Where:
 n = number of nodes
